@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>INVILA™ | Zero Capex Water Infrastructure</title>
-  <meta name="description" content="Executive minimal landing page for Invila™ with integrated engineered water infrastructure proof video." />
+  <title>Invila™ | Zero Capex Water Infrastructure</title>
+  <meta name="description" content="Landing page executive untuk Invila™: Zero Capex Water Infrastructure, Water as a Service, SCADA-IoT visibility, dan strategic saving audit untuk proyek air industri." />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     :root {
       --ink: #10182b;
       --muted: #5f6c84;
-      --line: rgba(16,24,43,0.08);
+      --line: rgba(16, 24, 43, 0.08);
       --brand: #2a5fff;
       --brand-dark: #17378f;
-      --brand-soft: rgba(42,95,255,0.08);
-      --shadow: 0 24px 64px rgba(17,24,39,0.08);
-      --shadow-soft: 0 14px 28px rgba(17,24,39,0.05);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
+      --brand-soft: rgba(42, 95, 255, 0.08);
+      --teal: #0f766e;
+      --rose: #f43f5e;
+      --dark-hero: #08111f;
+      --shadow: 0 24px 64px rgba(17, 24, 39, 0.08);
+      --shadow-soft: 0 14px 28px rgba(17, 24, 39, 0.05);
       --pill: 999px;
       --max: 1240px;
       --brand-name-size: clamp(36px, 3.9vw, 55px);
       --brand-tagline-size: calc(var(--brand-name-size) * 13 / 55);
-      --brand-logo-height: calc(var(--brand-name-size) * 2);
     }
 
     * { box-sizing: border-box; }
@@ -32,14 +33,17 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 8% 10%, rgba(42,95,255,0.07), transparent 22%),
-        radial-gradient(circle at 94% 4%, rgba(96,165,250,0.10), transparent 20%),
+        radial-gradient(circle at 8% 10%, rgba(42, 95, 255, 0.07), transparent 22%),
+        radial-gradient(circle at 94% 4%, rgba(96, 165, 250, 0.1), transparent 20%),
         linear-gradient(180deg, #ffffff 0%, #f7f9fc 48%, #f3f5fa 100%);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
+
     img, video { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
     .wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
 
     .brand-wordmark,
@@ -50,15 +54,15 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      background: rgba(255,255,255,0.72);
+      background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid transparent;
       transition: 180ms ease;
     }
     .site-header.scrolled {
-      background: rgba(255,255,255,0.88);
+      background: rgba(255, 255, 255, 0.88);
       border-bottom-color: var(--line);
-      box-shadow: 0 10px 30px rgba(17,24,39,0.05);
+      box-shadow: 0 10px 30px rgba(17, 24, 39, 0.05);
     }
     .header-row {
       min-height: 96px;
@@ -67,19 +71,32 @@
       justify-content: space-between;
       gap: 20px;
     }
+
     .brand {
       display: flex;
       align-items: center;
       gap: 16px;
       min-width: 0;
     }
-    .brand-mark {
-      height: var(--brand-logo-height);
-      width: auto;
+    .logo-card {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
       flex: 0 0 auto;
-      filter: drop-shadow(0 10px 24px rgba(42,95,255,0.12));
     }
-    .brand-lockup { display: flex; flex-direction: column; gap: 6px; min-width: 0; line-height: 1; }
+    .logo-card img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 24px rgba(42, 95, 255, 0.18));
+    }
+    .brand-lockup {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+      line-height: 1;
+    }
     .brand-wordmark {
       margin: 0;
       font-size: var(--brand-name-size);
@@ -96,7 +113,6 @@
       position: relative;
       top: -0.08em;
       margin-left: 0.04em;
-      letter-spacing: -0.02em;
     }
     .brand-tagline {
       margin: 0;
@@ -107,25 +123,11 @@
       color: var(--brand);
       white-space: nowrap;
     }
-    .brand-tagline .waas {
+    .brand-tagline .sub {
       color: #121a2e;
       letter-spacing: 0.05em;
       text-transform: none;
       margin-left: 0.18em;
-    }
-
-    .logo-card {
-      width: 84px;
-      height: 84px;
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
-    }
-    .logo-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 10px 24px rgba(42,95,255,0.18));
     }
 
     .nav { display: flex; align-items: center; gap: 4px; }
@@ -150,7 +152,6 @@
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.92);
       padding: 0;
-      cursor: pointer;
     }
     .menu-toggle::before,
     .menu-toggle::after,
@@ -177,7 +178,7 @@
       border: 1px solid transparent;
       font-size: 0.79rem;
       font-weight: 800;
-      letter-spacing: 0.10em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: 180ms ease;
       white-space: nowrap;
@@ -186,7 +187,7 @@
     .btn-primary {
       color: #fff;
       background: linear-gradient(135deg, var(--brand), #5f84ff);
-      box-shadow: 0 18px 42px rgba(42,95,255,0.24);
+      box-shadow: 0 18px 42px rgba(42, 95, 255, 0.24);
     }
     .btn-secondary {
       color: var(--ink);
@@ -194,7 +195,11 @@
       border-color: var(--line);
       box-shadow: var(--shadow-soft);
     }
-    .btn-light { background: #fff; color: #0f1a36; box-shadow: 0 18px 36px rgba(255,255,255,0.14); }
+    .btn-light {
+      background: #fff;
+      color: #0f1a36;
+      box-shadow: 0 18px 36px rgba(255,255,255,0.14);
+    }
 
     .mobile-nav { display: none; padding-bottom: 18px; }
     .mobile-card {
@@ -237,7 +242,13 @@
       text-transform: uppercase;
       color: var(--brand);
     }
-    .eyebrow-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 6px rgba(42,95,255,0.10); }
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(42,95,255,0.10);
+    }
     h1 {
       margin: 24px 0 0;
       max-width: 13ch;
@@ -248,14 +259,9 @@
       color: #0d1426;
       text-wrap: balance;
     }
-    h1 .headline-break {
-      display: block;
-    }
-    h1 .accent {
-      color: var(--brand);
-      display: block;
-      margin-top: 0.14em;
-    }
+    h1 .headline-break,
+    h1 .accent { display: block; }
+    h1 .accent { color: var(--brand); margin-top: 0.14em; }
     .hero-sub {
       margin: 20px 0 0;
       max-width: 34rem;
@@ -264,7 +270,6 @@
       color: var(--muted);
       text-wrap: pretty;
     }
-    .hero-sub strong { color: var(--ink); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
     .hero-footnote {
       display: flex;
@@ -275,21 +280,32 @@
       color: #6b7588;
       font-weight: 600;
     }
-    .hero-footnote::before { content: ""; width: 28px; height: 1px; background: rgba(16,24,43,0.16); }
-
-    .pain-head {
-      margin-top: 34px;
-      margin-bottom: 10px;
-      max-width: 760px;
+    .hero-footnote::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(16,24,43,0.16);
     }
-    .pain-kicker {
+
+    .pain-head { margin-top: 34px; margin-bottom: 10px; max-width: 760px; }
+    .pain-kicker,
+    .section-kicker,
+    .risk-kicker,
+    .blueprint-kicker,
+    .engines-kicker,
+    .audit-kicker {
       margin: 0 0 10px;
       font-size: 0.72rem;
       font-weight: 900;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--brand);
     }
+    .pain-kicker,
+    .section-kicker,
+    .blueprint-kicker,
+    .audit-kicker { color: var(--brand); }
+    .risk-kicker { color: #dc2626; }
+    .engines-kicker { color: var(--teal); }
     .pain-title {
       margin: 0;
       max-width: 18ch;
@@ -319,7 +335,7 @@
     .hero-point small {
       display: block;
       margin-bottom: 10px;
-      font-size: 0.70rem;
+      font-size: 0.7rem;
       font-weight: 900;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -369,15 +385,20 @@
       text-transform: uppercase;
       color: var(--brand);
     }
-    .media-label::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 6px rgba(42,95,255,0.10); }
+    .media-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(42,95,255,0.10);
+    }
     .media-window {
       position: relative;
       overflow: hidden;
       border-radius: 26px;
       border: 1px solid rgba(16,24,43,0.08);
       background: #dfe7f6;
-      aspect-ratio: 16 / 10;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.68);
       min-height: 520px;
       isolation: isolate;
     }
@@ -414,7 +435,7 @@
       border: 1px solid rgba(255,255,255,0.07);
       box-shadow: 0 8px 20px rgba(9,16,32,0.10);
       backdrop-filter: blur(5px);
-      color: #ffffff;
+      color: #fff;
       max-width: 560px;
       opacity: 0;
       visibility: hidden;
@@ -429,7 +450,7 @@
     }
     .media-executive-overlay small {
       display: block;
-      font-size: 0.60rem;
+      font-size: 0.6rem;
       font-weight: 900;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -441,49 +462,8 @@
       font-size: clamp(0.96rem, 1.2vw, 1.12rem);
       line-height: 1.26;
       letter-spacing: -0.01em;
-      color: #ffffff;
+      color: #fff;
     }
-    .media-executive-meta {
-      display: none;
-    }
-    .media-executive-meta span {
-      display: none;
-    }
-    .media-overlay {
-      position: absolute;
-      inset: auto 14px 14px 14px;
-      display: grid;
-      gap: 12px;
-      padding: 16px 18px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, rgba(9,16,32,0.08), rgba(9,16,32,0.74));
-      color: #ffffff;
-      backdrop-filter: blur(6px);
-    }
-    .media-overlay small {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 900;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.86;
-    }
-    .media-overlay strong {
-      display: block;
-      font-size: 1.18rem;
-      line-height: 1.35;
-      max-width: 18ch;
-    }
-    .media-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 16px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      opacity: 0.92;
-    }
-    .media-meta span { display: inline-flex; align-items: center; gap: 8px; }
-    .media-meta span::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: rgba(255,255,255,0.88); }
 
     .section { padding: 0 0 88px; }
     .section-head {
@@ -492,14 +472,6 @@
       justify-content: space-between;
       gap: 22px;
       margin-bottom: 28px;
-    }
-    .section-kicker {
-      margin: 0 0 12px;
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--brand);
     }
     .section-title {
       margin: 0;
@@ -516,12 +488,18 @@
       line-height: 1.82;
     }
 
-    .value-band {
-      padding: 28px 30px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.82));
+    .value-band,
+    .solution-shell,
+    .risk-shell,
+    .blueprint-shell,
+    .engines-shell {
+      border-radius: 32px;
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
+    }
+    .value-band {
+      padding: 28px 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.82));
     }
     .value-grid {
       display: grid;
@@ -531,7 +509,7 @@
     .value-item small {
       display: block;
       margin-bottom: 10px;
-      font-size: 0.70rem;
+      font-size: 0.7rem;
       font-weight: 900;
       letter-spacing: 0.13em;
       text-transform: uppercase;
@@ -545,19 +523,643 @@
       font-weight: 650;
     }
 
-    .solution-shell {
+    .risk-shell,
+    .blueprint-shell,
+    .engines-shell,
+    .audit-shell,
+    .solution-shell,
+    .cta-shell { padding: 34px; }
+    .risk-shell,
+    .blueprint-shell { background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.84)); }
+    .engines-shell { background: linear-gradient(180deg, rgba(240,253,250,0.92), rgba(255,255,255,0.84)); }
+    .risk-head,
+    .blueprint-head,
+    .engines-head,
+    .audit-head { margin-bottom: 24px; }
+    .risk-head h3,
+    .blueprint-head h3,
+    .engines-head h3,
+    .audit-head h3 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+      color: #0d1426;
+      text-wrap: balance;
+    }
+    .risk-head p,
+    .blueprint-head p,
+    .engines-head p {
+      margin: 12px 0 0;
+      max-width: 48rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.74;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .risk-card {
+      display: flex;
+      align-items: center;
+      min-height: 84px;
+      padding: 18px 18px 18px 16px;
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid rgba(220,38,38,0.10);
+      border-left: 5px solid #ef4444;
+      transition: 180ms ease;
+      box-shadow: 0 10px 24px rgba(17,24,39,0.04);
+    }
+    .risk-card:hover {
+      transform: translateX(4px);
+      background: #fff7f7;
+      box-shadow: 0 14px 30px rgba(239,68,68,0.08);
+    }
+    .risk-card span {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #172033;
+      line-height: 1.45;
+      text-align: left;
+    }
+    .risk-footnote {
+      margin: 18px 0 0;
+      text-align: center;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .blueprint-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .blueprint-card {
+      padding: 28px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid rgba(16,24,43,0.06);
+      box-shadow: 0 14px 28px rgba(17,24,39,0.05);
+      transition: 180ms ease;
+      text-align: center;
+    }
+    .blueprint-card:hover { transform: translateY(-4px); box-shadow: 0 20px 38px rgba(17,24,39,0.08); }
+    .blueprint-icon,
+    .engine-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 18px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+    .blueprint-icon { background: rgba(42,95,255,0.10); color: var(--brand); }
+    .blueprint-card h4,
+    .engine-card h4 {
+      margin: 0 0 12px;
+      font-size: 1.22rem;
+      line-height: 1.22;
+      letter-spacing: -0.03em;
+      color: #10182b;
+    }
+    .blueprint-card p,
+    .engine-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.72;
+    }
+
+    .engines-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .engine-card {
+      padding: 20px 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(15,118,110,0.10);
+      text-align: center;
+      transition: 180ms ease;
+      box-shadow: 0 10px 24px rgba(15,118,110,0.04);
+    }
+    .engine-card:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: rgba(15,118,110,0.24);
+      box-shadow: 0 18px 36px rgba(15,118,110,0.10);
+    }
+    .engine-icon { background: rgba(15,118,110,0.10); color: var(--teal); margin-bottom: 14px; }
+    .engine-card strong {
+      display: block;
+      font-size: 0.74rem;
+      line-height: 1.45;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+
+    .audit-shell {
       padding: 34px;
       border-radius: 32px;
+      background: linear-gradient(135deg, var(--dark-hero) 0%, #020617 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 24px 60px rgba(2,6,23,0.35);
+    }
+    .audit-head h3 { color: #fff; }
+    .audit-copy {
+      margin: 12px 0 0;
+      max-width: 48rem;
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      line-height: 1.74;
+    }
+    .audit-layout {
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .glass-panel {
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(15,23,42,0.72), rgba(2,6,23,0.82));
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+    }
+    .control-panel { padding: 26px; }
+    .control-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .control-badge {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #22d3ee;
+      color: #06111f;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+    .control-top span,
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .control-panel .field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .control-panel input {
+      width: 100%;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 900;
+      color: #fff;
+      outline: none;
+    }
+    .control-panel input:focus {
+      border-color: rgba(34,211,238,0.7);
+      background: rgba(34,211,238,0.06);
+    }
+    .audit-main { display: grid; gap: 22px; }
+    .hero-saving {
+      padding: 32px;
+      border-radius: 34px;
+      background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+      border: 1px solid rgba(42,95,255,0.18);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hero-saving .value-label {
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #60a5fa;
+    }
+    .hero-saving h4 {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 7.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-style: italic;
+      color: #fff;
+      text-wrap: balance;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .metric-card {
+      padding: 28px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(15,23,42,0.66), rgba(2,6,23,0.78));
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .metric-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(1.5rem, 2.6vw, 3rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      font-style: italic;
+      color: #fff;
+    }
+    .metric-icon {
+      font-size: 1.6rem;
+      opacity: 0.3;
+      color: rgba(255,255,255,0.7);
+    }
+    .strategy-panel {
+      padding: 34px;
+      border-radius: 34px;
+      background: linear-gradient(90deg, #1e1b4b 0%, #020617 100%);
+      border: 1px solid rgba(244,63,94,0.22);
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .strategy-panel p {
+      margin: 10px 0 0;
+      max-width: 34rem;
+      color: rgba(255,255,255,0.65);
+      font-size: 1rem;
+      line-height: 1.72;
+      font-style: italic;
+    }
+    .strategy-panel h4 {
+      margin: 0;
+      font-size: clamp(2.6rem, 6vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      font-style: italic;
+      color: #fb7185;
+      text-wrap: balance;
+    }
+    .download-wrap { display: flex; justify-content: center; padding-top: 6px; }
+    .download-btn {
+      position: relative;
+      min-height: 78px;
+      width: min(100%, 420px);
+      padding: 0 34px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ff4c73 0%, #f43f5e 100%);
+      color: #fff;
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      box-shadow: 0 30px 70px rgba(244,63,94,0.30), 0 0 60px rgba(244,63,94,0.18);
+      transition: 180ms ease;
+    }
+    .download-btn:hover { transform: translateY(-1px); background: linear-gradient(180deg, #ff5a7d 0%, #ef3354 100%); }
+    .download-btn:disabled {
+      opacity: 0.72;
+      cursor: wait;
+      transform: none;
+    }
+
+    .pdf-stage {
+      position: absolute;
+      left: -99999px;
+      top: 0;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    .pdf-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 18mm;
+      background: #f3f4f6;
+      color: #0f172a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .pdf-page * { box-sizing: border-box; }
+    .pdf-topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    .pdf-brand {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #0f172a;
+    }
+    .pdf-brand .tm { color: #2563eb; }
+    .pdf-confidential {
+      text-align: right;
+      color: #64748b;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .pdf-subreport {
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #0f172a;
+    }
+    .pdf-section-blue {
+      margin-top: 26px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #3b82f6;
+    }
+    .pdf-title {
+      margin: 12px 0 0;
+      font-size: 28px;
+      line-height: 1.14;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+    }
+    .pdf-copy {
+      margin-top: 28px;
+      color: #475569;
+      font-size: 13px;
+      line-height: 1.72;
+    }
+    .pdf-label-block {
+      margin-top: 28px;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 14px;
+      font-size: 10px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+    }
+    .pdf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .pdf-table th {
+      text-align: left;
+      color: #94a3b8;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 0 10px 12px 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .pdf-table td {
+      padding: 18px 10px 0 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .pdf-table td.blue { color: #2563eb; }
+    .pdf-kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .pdf-kpi-card {
+      min-height: 118px;
+      border-radius: 24px;
+      background: #e9edf2;
+      border: 1px solid #dde3ea;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .pdf-kpi-card .label {
+      font-size: 9px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+    .pdf-kpi-card .value {
+      margin-top: 12px;
+      font-size: 28px;
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .pdf-divider {
+      margin-top: 34px;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 18px;
+    }
+    .pdf-sync-title {
+      color: #3b82f6;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .pdf-sync-copy {
+      margin-top: 8px;
+      color: #94a3b8;
+      font-size: 10px;
+      line-height: 1.65;
+    }
+    .pdf-sync-foot {
+      margin-top: 18px;
+      color: #cbd5e1;
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .pdf-page-two .pdf-topline {
+      margin-top: 0;
+      color: #3b82f6;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .pdf-page-two .pdf-title {
+      margin-top: 10px;
+      font-size: 30px;
+      border-bottom: 3px solid #1f2937;
+      padding-bottom: 14px;
+    }
+    .pdf-chart-card {
+      margin-top: 24px;
+      border-radius: 34px;
+      background: #eceff3;
+      padding: 24px 20px 14px 20px;
+      border: 1px solid #e5e7eb;
+    }
+    .pdf-chart-wrap {
+      height: 320px;
+      position: relative;
+      border-left: 3px solid #d5dce5;
+      border-bottom: 3px solid #d5dce5;
+      margin: 18px 18px 0 18px;
+    }
+    .pdf-chart-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .pdf-chart-years {
+      display: flex;
+      justify-content: space-between;
+      margin: 14px 14px 0 20px;
+      color: #94a3b8;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .pdf-two-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .pdf-card-gray,
+    .pdf-card-blue,
+    .pdf-card-rose,
+    .pdf-card-note {
+      border-radius: 24px;
+      padding: 22px;
+      border: 1px solid #e5e7eb;
+      background: #eceff3;
+    }
+    .pdf-card-blue {
+      background: #dcedfa;
+      border-color: #bcdcf8;
+    }
+    .pdf-card-rose {
+      margin-top: 20px;
+      background: #fdf0f3;
+      border-color: #f8c6d0;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+    .pdf-card-note {
+      margin-top: 24px;
+      background: #eceff3;
+    }
+    .pdf-mini-label {
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #64748b;
+      letter-spacing: 0.08em;
+    }
+    .pdf-card-blue .pdf-mini-label { color: #0369a1; }
+    .pdf-card-rose .pdf-mini-label { color: #e11d48; }
+    .pdf-card-value {
+      margin-top: 10px;
+      font-size: 23px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .pdf-card-blue .pdf-card-value { color: #0c4a6e; font-size: 26px; }
+    .pdf-rose-copy {
+      margin-top: 10px;
+      max-width: 60%;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .pdf-rose-total {
+      text-align: right;
+    }
+    .pdf-rose-total .big {
+      margin-top: 10px;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+      color: #e11d48;
+    }
+    .pdf-rose-total .small {
+      margin-top: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      color: #e11d48;
+    }
+    .pdf-note-title {
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+    .pdf-note-copy {
+      margin-top: 12px;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.72;
+    }
+    .pdf-system {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+    }
+
+    .solution-shell {
       background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.82));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
     }
     .solution-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
     }
-    .solution-item + .solution-item { border-left: 1px solid rgba(16,24,43,0.08); padding-left: 24px; }
+    .solution-item + .solution-item {
+      border-left: 1px solid rgba(16,24,43,0.08);
+      padding-left: 24px;
+    }
     .solution-item small {
       display: block;
       margin-bottom: 12px;
@@ -567,15 +1169,24 @@
       text-transform: uppercase;
       color: var(--brand);
     }
-    .solution-item h3 { margin: 0 0 12px; font-size: 1.26rem; line-height: 1.25; letter-spacing: -0.03em; }
-    .solution-item p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.72; }
+    .solution-item h3 {
+      margin: 0 0 12px;
+      font-size: 1.26rem;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+    }
+    .solution-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.72;
+    }
 
     .cta-shell {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       gap: 24px;
-      padding: 34px;
       border-radius: 32px;
       background: linear-gradient(135deg, #0f1a36 0%, #19398f 100%);
       color: #fff;
@@ -590,8 +1201,83 @@
       text-transform: uppercase;
       color: rgba(255,255,255,0.70);
     }
-    .cta-shell h3 { margin: 0 0 12px; font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.04; letter-spacing: -0.05em; }
-    .cta-shell p { margin: 0; max-width: 40rem; font-size: 1.04rem; line-height: 1.82; color: rgba(255,255,255,0.82); }
+    .cta-shell h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+    }
+    .cta-shell p {
+      margin: 0;
+      max-width: 40rem;
+      font-size: 1.04rem;
+      line-height: 1.82;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .risk-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .risk-modal.active { display: flex; }
+    .risk-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15,23,42,0.80);
+      backdrop-filter: blur(8px);
+    }
+    .risk-modal-card {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 640px);
+      padding: 30px;
+      border-radius: 30px;
+      background: #fff;
+      border: 1px solid rgba(16,24,43,0.06);
+      box-shadow: 0 26px 60px rgba(15,23,42,0.22);
+    }
+    .risk-modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 0;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 1.4rem;
+    }
+    .risk-modal-card h4 {
+      margin: 0 0 14px;
+      font-size: 1.9rem;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: #0f172a;
+    }
+    .risk-modal-card p {
+      margin: 0 0 22px;
+      color: #475569;
+      font-size: 1.02rem;
+      line-height: 1.74;
+    }
+    .risk-modal-cta {
+      width: 100%;
+      min-height: 54px;
+      border-radius: 18px;
+      border: 0;
+      background: #0f172a;
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
 
     footer { padding: 26px 0 36px; }
     .foot {
@@ -609,11 +1295,24 @@
       .nav, .header-actions .btn-secondary { display: none; }
       .menu-toggle { display: inline-block; }
       .mobile-nav.show { display: block; }
-      .hero-grid, .solution-grid, .value-grid, .cta-shell { grid-template-columns: 1fr; }
+      .hero-grid,
+      .solution-grid,
+      .value-grid,
+      .cta-shell,
+      .blueprint-grid,
+      .audit-layout,
+      .metric-grid,
+      .risk-grid { grid-template-columns: 1fr; }
       .hero-grid { gap: 26px; }
-      .solution-item + .solution-item { border-left: 0; border-top: 1px solid rgba(16,24,43,0.08); padding-left: 0; padding-top: 22px; }
+      .solution-item + .solution-item {
+        border-left: 0;
+        border-top: 1px solid rgba(16,24,43,0.08);
+        padding-left: 0;
+        padding-top: 22px;
+      }
       .section-head { grid-template-columns: 1fr; display: grid; }
       .media-card { order: -1; }
+      .engines-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       h1 {
         max-width: 12ch;
         font-size: clamp(2.6rem, 7vw, 4.2rem);
@@ -646,60 +1345,52 @@
         letter-spacing: -0.05em;
         text-wrap: pretty;
       }
-      h1 .headline-break,
-      h1 .accent {
-        display: block;
-      }
-      h1 .accent {
-        margin-top: 0.18em;
-      }
       .eyebrow {
         padding: 10px 14px;
         font-size: 0.63rem;
         letter-spacing: 0.12em;
       }
-      .hero-sub {
-        margin-top: 14px;
-        font-size: 0.93rem;
-        line-height: 1.62;
+      .hero-sub,
+      .pain-bridge,
+      .section-copy,
+      .risk-head p,
+      .blueprint-head p,
+      .engines-head p,
+      .audit-copy,
+      .strategy-panel p {
+        font-size: 0.94rem;
+        line-height: 1.66;
         max-width: 100%;
       }
-      .pain-head {
-        margin-top: 24px;
-        margin-bottom: 8px;
-      }
-      .pain-kicker {
-        font-size: 0.63rem;
-      }
+      .pain-head { margin-top: 24px; margin-bottom: 8px; }
+      .pain-kicker { font-size: 0.63rem; }
       .pain-title {
         max-width: 100%;
         font-size: clamp(1.2rem, 6vw, 1.65rem);
         line-height: 1.12;
       }
-      .pain-bridge {
-        margin-top: 10px;
-        font-size: 0.92rem;
-        line-height: 1.62;
-        max-width: 100%;
-      }
-      .hero-points {
-        grid-template-columns: 1fr;
-        gap: 14px;
-        margin-top: 18px;
-      }
-      .hero-point p {
-        font-size: 0.95rem;
-        line-height: 1.55;
-      }
-      .media-card, .solution-shell, .cta-shell, .value-band {
-        padding: 16px;
+      .hero-points,
+      .engines-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 18px; }
+      .hero-point p { font-size: 0.95rem; line-height: 1.55; }
+      .media-card,
+      .solution-shell,
+      .cta-shell,
+      .value-band,
+      .risk-shell,
+      .blueprint-shell,
+      .engines-shell,
+      .audit-shell,
+      .blueprint-card,
+      .engine-card,
+      .control-panel,
+      .hero-saving,
+      .metric-card,
+      .strategy-panel,
+      .risk-modal-card {
+        padding: 18px;
         border-radius: 22px;
       }
-      .media-top {
-        gap: 10px;
-        margin-bottom: 10px;
-        padding: 0 2px;
-      }
+      .media-top { gap: 10px; margin-bottom: 10px; padding: 0 2px; }
       .media-label,
       .media-top > div:last-child {
         font-size: 0.62rem !important;
@@ -718,9 +1409,7 @@
         border-radius: 14px;
         max-width: calc(100% - 20px);
       }
-      .media-executive-overlay small {
-        font-size: 0.55rem;
-      }
+      .media-executive-overlay small { font-size: 0.55rem; }
       .media-executive-overlay strong {
         max-width: 100%;
         font-size: 0.88rem;
@@ -734,31 +1423,32 @@
       }
       .hero-actions { display: grid; grid-template-columns: 1fr; }
       .section { padding: 0 0 56px; }
-      .section-title {
-        font-size: clamp(1.6rem, 8vw, 2.2rem);
+      .section-title,
+      .risk-head h3,
+      .blueprint-head h3,
+      .engines-head h3,
+      .audit-head h3 {
+        font-size: clamp(1.45rem, 7vw, 2rem);
         max-width: 100%;
       }
-      .section-copy {
-        font-size: 0.97rem;
-        line-height: 1.72;
-      }
-      .value-grid { gap: 18px; }
       .value-item p,
       .solution-item p,
-      .cta-shell p {
-        font-size: 0.95rem;
-        line-height: 1.66;
+      .cta-shell p,
+      .blueprint-card p { font-size: 0.95rem; line-height: 1.66; }
+      .cta-shell { gap: 18px; }
+      .cta-shell h3 { font-size: clamp(1.45rem, 7vw, 2rem); }
+      .control-panel input {
+        font-size: 1.5rem;
+        padding: 16px 18px;
       }
-      .cta-shell {
-        gap: 18px;
+      .download-btn {
+        width: 100%;
+        min-height: 56px;
+        padding: 0 18px;
+        letter-spacing: 0.14em;
+        font-size: 0.68rem;
       }
-      .cta-shell h3 {
-        font-size: clamp(1.45rem, 7vw, 2rem);
-      }
-      .foot {
-        font-size: 0.8rem;
-        gap: 10px;
-      }
+      .foot { font-size: 0.8rem; gap: 10px; }
     }
   </style>
 </head>
@@ -770,14 +1460,14 @@
           <div class="logo-card" aria-hidden="true"><img src="./logo-invila.png" alt="Invila logo" /></div>
           <div class="brand-lockup">
             <p class="brand-wordmark">Invila<sup>™</sup></p>
-            <p class="brand-tagline">Water as a Service <span class="waas">(W a a S)</span></p>
+            <p class="brand-tagline">Zero Capex Water Infrastructure <span class="sub">for Industry</span></p>
           </div>
         </a>
 
         <nav class="nav" aria-label="Primary">
           <a href="#zero-capex">Zero Capex</a>
-          <a href="#solutions">Solutions</a>
-          <a href="#video-proof">Assessment</a>
+          <a href="#risk-audit">Risks</a>
+          <a href="#audit-dashboard">Saving Audit</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -790,8 +1480,8 @@
       <div class="mobile-nav" id="mobileNav">
         <div class="mobile-card">
           <a href="#zero-capex">Zero Capex</a>
-          <a href="#solutions">Solutions</a>
-          <a href="#video-proof">Assessment</a>
+          <a href="#risk-audit">Risks</a>
+          <a href="#audit-dashboard">Saving Audit</a>
           <a href="#contact">Contact</a>
         </div>
       </div>
@@ -804,35 +1494,39 @@
         <div>
           <div class="eyebrow"><span class="eyebrow-dot"></span>Industrial Water Infrastructure Partner</div>
           <h1><span class="headline-break">Membangun 78 Juta m³/Tahun</span><span class="headline-break">Infrastruktur Air Indonesia,</span><span class="accent">Kami Berinvestasi untuk Pabrik Anda.</span></h1>
-          <p class="hero-sub">Berbekal portofolio publik dan industri, skema Zero Capex <span class="brand-inline">Invila<sup>™</sup></span> menghadirkan pasokan air yang terjamin dan penghematan yang terasa sejak hari pertama.</p>
+          <p class="hero-sub">Untuk CEO, ini tentang menjaga ekspansi tetap berjalan tanpa CapEx utilitas yang mengganggu prioritas inti. Untuk Direktur Keuangan, ini tentang struktur biaya air yang lebih terukur dan tekanan cash flow yang lebih ringan. Untuk Plant Manager dan Environment Manager, ini tentang kontinuitas suplai, kontrol operasional, dan kesiapan kepatuhan yang lebih kuat melalui model Zero Capex <span class="brand-inline">Invila<sup>™</sup></span>.</p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://wa.me/6285219493322?text=Halo%20Irfon%20Desman%2C%20saya%20ingin%20diskusi%20tentang%20Zero%20Capex%20Water%20Infrastructure%20Invila." target="_blank" rel="noopener">Talk to Irfon via WhatsApp</a>
-            <a class="btn btn-secondary" href="#contact">Request Site Assessment</a>
+            <a class="btn btn-primary" href="https://wa.me/6285219493322?text=Halo%20Irfon%20Desman%2C%20saya%20ingin%20diskusi%20tentang%20Zero%20Capex%20Water%20Infrastructure%20Invila." target="_blank" rel="noopener">Discuss via WhatsApp</a>
+            <a class="btn btn-secondary" href="#audit-dashboard">Review Saving Audit</a>
           </div>
 
-          <div class="hero-footnote">Factory visit available for strategic project review.</div>
+          <div class="hero-footnote">Mulai dari strategic review, site assessment, hingga factory visit untuk mengevaluasi kesiapan proyek secara langsung.</div>
 
           <div class="pain-head">
             <p class="pain-kicker">Pain Section</p>
-            <h2 class="pain-title">Tantangan Air Industri Kini Menjadi Tekanan Bisnis</h2>
-            <p class="pain-bridge">Di ruang direksi, air tidak lagi diposisikan sekadar sebagai utilitas pendukung, melainkan sebagai faktor yang ikut menentukan profitabilitas, kontinuitas produksi, dan fleksibilitas investasi perusahaan. Dinamika industri saat ini membuat infrastruktur air mulai memengaruhi biaya operasional, kestabilan produksi, hingga ruang gerak investasi.</p>
+            <h2 class="pain-title">Ketika Sistem Air Tidak Dikelola Strategis, Dampaknya Langsung Terasa ke Margin, Produksi, dan Kepatuhan.</h2>
+            <p class="pain-bridge">Di level direksi, air tidak lagi diperlakukan sebagai utilitas pendukung semata. Ia memengaruhi profitabilitas, kontinuitas produksi, kepastian kepatuhan, dan fleksibilitas investasi perusahaan. Saat biaya air tidak terukur, pasokan tidak stabil, atau sistem tidak siap menghadapi tekanan audit, dampaknya akan langsung terasa ke arus kas, performa pabrik, dan ruang gerak bisnis.</p>
           </div>
 
-          <div class="hero-points" id="zero-capex">
-            <div class="hero-point">
-              <small>Capital Focus</small>
-              <p>CapEx dapat tetap difokuskan pada ekspansi dan prioritas inti bisnis.</p>
+          <section class="section" id="risk-audit" style="padding:34px 0 0;">
+            <div class="risk-shell">
+              <div class="risk-head">
+                <p class="risk-kicker">Risiko Utilitas Industri</p>
+                <h3>Sistem air yang tidak terukur akan berkembang menjadi tekanan finansial, operasional, dan kepatuhan yang terus membesar.</h3>
+                <p>Untuk CEO, ini berarti ruang ekspansi menjadi lebih sempit. Untuk Direktur Keuangan, ini berarti margin dan cash flow terus tertekan. Untuk Plant Manager dan Environment Manager, ini berarti gangguan operasional, tekanan performa, dan risiko kepatuhan yang semakin sulit dikendalikan.</p>
+              </div>
+              <div class="risk-grid">
+                <button class="risk-card" type="button" data-risk="1"><span>01. Margin Keuntungan Terancam</span></button>
+                <button class="risk-card" type="button" data-risk="2"><span>02. Krisis Bahan Baku Air</span></button>
+                <button class="risk-card" type="button" data-risk="3"><span>03. Kerugian Akibat Downtime</span></button>
+                <button class="risk-card" type="button" data-risk="4"><span>04. Modal Mati di Utilitas</span></button>
+                <button class="risk-card" type="button" data-risk="5"><span>05. Ancaman Izin Operasional</span></button>
+                <button class="risk-card" type="button" data-risk="6"><span>06. Inefisiensi Biaya SDM</span></button>
+              </div>
+              <p class="risk-footnote">“Ketika utilitas hanya diposisikan sebagai cost center, perusahaan kehilangan peluang untuk mengubahnya menjadi instrumen efisiensi dan kepastian operasional.”</p>
             </div>
-            <div class="hero-point">
-              <small>Operational Stability</small>
-              <p>Model layanan menjaga kontinuitas suplai dan pengendalian operasional.</p>
-            </div>
-            <div class="hero-point">
-              <small>Measured Delivery</small>
-              <p>Implementasi modular mempercepat kesiapan operasi dalam horizon 1–3 bulan.</p>
-            </div>
-          </div>
+          </section>
         </div>
 
         <div class="media-card" id="video-proof">
@@ -857,7 +1551,7 @@
     </section>
 
     <section class="section">
-      <div class="wrap value-band">
+      <div class="wrap value-band" id="zero-capex">
         <div class="value-grid">
           <div class="value-item">
             <small>Zero Upfront CapEx</small>
@@ -879,32 +1573,150 @@
       </div>
     </section>
 
+    <section class="section" id="blueprint">
+      <div class="wrap">
+        <div class="blueprint-shell">
+          <div class="blueprint-head">
+            <p class="blueprint-kicker">The Blueprint</p>
+            <h3>Ubah sistem air dari beban biaya yang reaktif menjadi aset strategis yang mendukung keputusan bisnis.</h3>
+            <p>Model Invila™ menyatukan pembiayaan infrastruktur, delivery operasional, dan visibilitas SCADA-IoT dalam satu struktur yang lebih relevan untuk keputusan direksi. Hasilnya: modal tetap terjaga, struktur biaya lebih terukur, operasi lebih stabil, dan kesiapan kepatuhan lebih mudah dipantau.</p>
+          </div>
+          <div class="blueprint-grid">
+            <article class="blueprint-card">
+              <div class="blueprint-icon">01</div>
+              <h4>Zero Capex Infrastructure</h4>
+              <p>CEO dan Direktur Keuangan dapat menjaga likuiditas untuk ekspansi, akuisisi, atau prioritas inti bisnis, tanpa menunda modernisasi infrastruktur air yang dibutuhkan pabrik.</p>
+            </article>
+            <article class="blueprint-card">
+              <div class="blueprint-icon">02</div>
+              <h4>Water as a Service</h4>
+              <p>Direktur Keuangan mendapatkan struktur biaya yang lebih jelas dan selaras dengan penggunaan aktual, sementara risiko operasional utama tidak lagi sepenuhnya dibebankan ke internal klien.</p>
+            </article>
+            <article class="blueprint-card">
+              <div class="blueprint-icon">03</div>
+              <h4>Digital Intelligence</h4>
+              <p>Plant Manager dan Environment Manager memperoleh visibilitas performa, efisiensi, dan kesiapan kepatuhan yang lebih cepat untuk dipantau, direspons, dan dibuktikan saat dibutuhkan.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="core-engines">
+      <div class="wrap">
+        <div class="engines-shell">
+          <div class="engines-head">
+            <p class="engines-kicker">Pilar 06: Core Invila Basic Engines</p>
+            <h3>Teknologi eksklusif yang dirancang untuk menjaga stabilitas operasi, kualitas hasil, dan percepatan implementasi.</h3>
+            <p>Didukung 6 Core Basic Engines dan desain modular unit, solusi ini dibangun untuk membantu Plant Manager menjaga keandalan operasi, membantu Environment Manager menjaga konsistensi kualitas effluent, dan membantu direksi mempercepat kesiapan implementasi dalam horizon 1–3 bulan.</p>
+          </div>
+          <div class="engines-grid">
+            <article class="engine-card"><div class="engine-icon">A</div><strong>Hybrid Lamella Clarifier-DECM™</strong></article>
+            <article class="engine-card"><div class="engine-icon">B</div><strong>Invila™ Aero-Shock Cooler</strong></article>
+            <article class="engine-card"><div class="engine-icon">C</div><strong>Invila™ Oxy-Pure System</strong></article>
+            <article class="engine-card"><div class="engine-icon">D</div><strong>Invila™ High GT Flocculator</strong></article>
+            <article class="engine-card"><div class="engine-icon">E</div><strong>Invila™ Smart Aero-GSF</strong></article>
+            <article class="engine-card"><div class="engine-icon">F</div><strong>OXY-Pure-MBBR Hybrid</strong></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="audit-dashboard">
+      <div class="wrap">
+        <div class="audit-shell">
+          <div class="audit-head">
+            <p class="audit-kicker">Intelligence Saving Audit</p>
+            <h3>Potensi saving dan nilai infrastruktur dapat divisualisasikan langsung untuk mempercepat diskusi bisnis dan evaluasi proyek.</h3>
+            <p class="audit-copy">Bagi CEO dan Direktur Keuangan, panel ini membantu melihat gambaran potensi outcome finansial dengan cepat. Bagi Plant Manager dan Environment Manager, panel ini menjadi pintu masuk diskusi yang lebih konkret tentang kapasitas, struktur biaya, dan relevansi implementasi untuk kondisi operasional aktual.</p>
+          </div>
+
+          <div class="audit-layout">
+            <aside class="glass-panel control-panel">
+              <div class="control-top">
+                <div class="control-badge">IV</div>
+                <span>Control Panel</span>
+              </div>
+              <div class="field">
+                <label class="stat-label" for="input-flow">Debit (m³/hari)</label>
+                <input type="text" id="input-flow" data-key="flowRate" value="1,500" inputmode="numeric" />
+              </div>
+              <div class="field">
+                <label class="stat-label" for="input-legacy">Legacy Cost (Rp/m³)</label>
+                <input type="text" id="input-legacy" data-key="legacyCost" value="14,600" inputmode="numeric" />
+              </div>
+              <div class="field" style="margin-bottom:0;">
+                <label class="stat-label" for="input-tariff">Invila Tarif (Rp/m³)</label>
+                <input type="text" id="input-tariff" data-key="invilaTariff" value="5,500" inputmode="numeric" />
+              </div>
+            </aside>
+
+            <div class="audit-main">
+              <div class="hero-saving">
+                <span class="value-label">Monthly Potential Saving</span>
+                <h4 id="view-monthly-saving">Rp 0</h4>
+              </div>
+
+              <div class="metric-grid">
+                <div class="metric-card">
+                  <div>
+                    <span class="stat-label">Annual Saving</span>
+                    <strong id="view-annual-saving">Rp 0</strong>
+                  </div>
+                  <div class="metric-icon">◔</div>
+                </div>
+                <div class="metric-card">
+                  <div>
+                    <span class="stat-label">Infrastructure Value Covered by Invila™</span>
+                    <strong id="view-capex-total">Rp 0</strong>
+                  </div>
+                  <div class="metric-icon">⬢</div>
+                </div>
+              </div>
+
+              <div class="strategy-panel">
+                <div>
+                  <span class="stat-label" style="color:#fb7185;">5-Year Savings Projection</span>
+                  <p>Memberikan gambaran nilai finansial jangka menengah, tanpa kebutuhan CapEx awal dan tanpa beban perawatan aset yang sepenuhnya tinggal di pihak klien.</p>
+                </div>
+                <h4 id="view-five-year-saving">Rp 0</h4>
+              </div>
+
+              <div class="download-wrap">
+                <button class="download-btn" type="button" id="btn-download">Request Strategic Report</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="solutions">
       <div class="wrap">
         <div class="section-head">
           <div>
             <p class="section-kicker">Integrated Model</p>
-            <h2 class="section-title">One integrated structure for water security.</h2>
+            <h2 class="section-title">Satu struktur terintegrasi untuk keamanan suplai, efisiensi biaya, dan kontrol yang lebih kuat.</h2>
           </div>
-          <p class="section-copy">Dibangun untuk keputusan level direksi, model <span class="brand-inline">Invila<sup>™</sup></span> menyatukan pembiayaan infrastruktur, delivery operasional, dan monitoring digital dalam satu kerangka yang lebih stabil dan terukur.</p>
+          <p class="section-copy">Dibangun untuk kebutuhan level direksi sekaligus kebutuhan operasional pabrik, model <span class="brand-inline">Invila<sup>™</sup></span> menyatukan pembiayaan infrastruktur, delivery operasional, dan monitoring digital dalam satu kerangka yang lebih stabil, terukur, dan mudah dipertanggungjawabkan.</p>
         </div>
 
         <div class="solution-shell">
           <div class="solution-grid">
             <div class="solution-item">
               <small>Zero Capex Infrastructure</small>
-              <h3>Capital preserved for core business priorities.</h3>
-              <p>Perusahaan mengadopsi infrastruktur air berteknologi mutakhir tanpa kebutuhan investasi awal yang membebani cash flow.</p>
+              <h3>CapEx tetap fokus untuk ekspansi dan prioritas inti bisnis.</h3>
+              <p>Direksi tidak perlu menahan agenda pertumbuhan hanya karena kebutuhan modernisasi utilitas air yang memakan dana besar di depan.</p>
             </div>
             <div class="solution-item">
               <small>Water as a Service</small>
-              <h3>Commercial structure aligned to measured use.</h3>
-              <p>Model layanan menggeser fokus dari kepemilikan aset ke ketersediaan performa dan kualitas pasokan air yang dibutuhkan industri.</p>
+              <h3>Struktur komersial mengikuti penggunaan yang lebih terukur.</h3>
+              <p>Fokus bergeser dari sekadar memiliki aset menjadi memastikan performa, kualitas suplai, dan biaya layanan tetap relevan bagi kebutuhan industri.</p>
             </div>
             <div class="solution-item">
               <small>SCADA-IoT Visibility</small>
-              <h3>Monitoring that strengthens confidence.</h3>
-              <p>Layer digital memberi visibilitas performa, respons operasional, dan dukungan pengambilan keputusan yang lebih cepat.</p>
+              <h3>Monitoring yang memperkuat kontrol dan keyakinan pengambilan keputusan.</h3>
+              <p>Lapisan digital memberi visibilitas performa, respons operasional, dan dukungan keputusan yang lebih cepat untuk tim pabrik maupun manajemen.</p>
             </div>
           </div>
         </div>
@@ -916,10 +1728,10 @@
         <div class="cta-shell">
           <div>
             <small>Strategic Discussion</small>
-            <h3>Discuss your water infrastructure strategy with <span class="brand-inline">Invila<sup>™</sup></span>.</h3>
-            <p>Mulai dari review kebutuhan proyek, asesmen kapasitas, hingga opsi factory visit untuk melihat delivery capability dan kesiapan implementasi secara lebih dekat.</p>
+            <h3>Diskusikan strategi infrastruktur air industri Anda bersama <span class="brand-inline">Invila<sup>™</sup></span>.</h3>
+            <p>Mulai dari review kebutuhan proyek, simulasi struktur biaya, asesmen kapasitas, hingga factory visit untuk membantu CEO, Direktur Keuangan, Plant Manager, dan Environment Manager menilai apakah model ini relevan untuk target bisnis dan kebutuhan operasional Anda.</p>
           </div>
-          <a class="btn btn-light" href="https://wa.me/6285219493322?text=Halo%20Irfon%20Desman%2C%20saya%20ingin%20request%20assessment%20untuk%20proyek%20air%20industri." target="_blank" rel="noopener">Talk to Irfon via WhatsApp</a>
+          <a class="btn btn-light" href="https://wa.me/6285219493322?text=Halo%20Irfon%20Desman%2C%20saya%20ingin%20request%20assessment%20untuk%20proyek%20air%20industri." target="_blank" rel="noopener">Request Project Assessment via WhatsApp</a>
         </div>
       </div>
     </section>
@@ -927,10 +1739,110 @@
 
   <footer>
     <div class="wrap foot">
-      <div><span class="brand-inline">Invila<sup>™</sup></span> — Water as a Service</div>
-      <div>WhatsApp: Irfon Desman &nbsp; 085219493322</div>
+      <div><span class="brand-inline">Invila<sup>™</sup></span> — PT. Invila Tirta Nusantara</div>
+      <div>Sentra Niaga 2 No. 5 Harapan Indah, Bekasi 17131, Jawa Barat</div>
+      <div>WhatsApp: Irfon Desman · 085219493322</div>
     </div>
   </footer>
+
+  <div class="pdf-stage" aria-hidden="true">
+    <div class="pdf-page" id="pdf-page-1">
+      <div class="pdf-topbar">
+        <div class="pdf-brand">INVILA<span class="tm">™</span> SNAPSHOT</div>
+        <div class="pdf-confidential">CONFIDENTIAL INDUSTRIAL REPORT<div class="pdf-subreport">Ringkasan Saving Audit</div></div>
+      </div>
+      <div class="pdf-section-blue">Financial Upside of Shifting to Invila™ Zero Capex Model</div>
+      <div class="pdf-title">RINGKASAN NILAI INVESTASI &amp; POTENSI PENGHEMATAN INVILA™ INTELLIGENCE</div>
+      <div class="pdf-copy">
+        Kami percaya bahwa efisiensi sejati tidak hanya diukur dari kemampuan membangun aset fisik tetapi dari bagaimana aset tersebut memberikan nilai maksimal setiap harinya. Inilah landasan filosofi Invila™ dalam menghadirkan transformasi dari EPC Contractor menjadi model WaaS (Water as a Service) Provider.
+        <br /><br />
+        Melalui model ini kami membantu Anda mengeliminasi risiko operasional serta memitigasi beban biaya modal (CapEx) yang tinggi menjadi kinerja yang lebih terukur. Dengan teknologi yang telah teruji melayani PDAM dan industri besar, kami memastikan suplai air Anda tidak akan terputus.
+      </div>
+      <div class="pdf-label-block">Basis Data Simulasi</div>
+      <table class="pdf-table">
+        <thead>
+          <tr>
+            <th>Debit Harian</th>
+            <th>Biaya Lama (Legacy)</th>
+            <th>Tarif Invila (WaaS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="pdf-table-flow">1.500 m³/day</td>
+            <td id="pdf-table-legacy">Rp14.600</td>
+            <td id="pdf-table-tariff" class="blue">Rp5.500</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pdf-kpi-grid">
+        <div class="pdf-kpi-card">
+          <div class="label">Potensi Hemat Bulanan</div>
+          <div class="value" id="pdf-val-monthly">Rp 409.5 Juta</div>
+        </div>
+        <div class="pdf-kpi-card">
+          <div class="label">Hemat Tahunan</div>
+          <div class="value" id="pdf-val-annual">Rp 4.91 Miliar</div>
+        </div>
+      </div>
+      <div class="pdf-divider">
+        <div class="pdf-sync-title">Hasil Sinkronisasi</div>
+        <div class="pdf-sync-copy">Angka penghematan yang tertera dalam PDF ini adalah hasil sinkronisasi data presisi sebuah solusi finansial yang realistis untuk keberlanjutan industri yang dapat kita wujudkan antara entitas Anda dan Invila™.</div>
+        <div class="pdf-sync-foot">Dipersembahkan oleh Invila Intelligence Cope</div>
+      </div>
+    </div>
+
+    <div class="pdf-page pdf-page-two" id="pdf-page-2">
+      <div class="pdf-topline">Audit Valuasi Infrastruktur</div>
+      <div class="pdf-title">ANALISIS NILAI ASET: SETUP LAMA VS INFRASTRUKTUR ZERO CAPEX INVILA™</div>
+      <div class="pdf-chart-card">
+        <div class="pdf-chart-wrap">
+          <svg class="pdf-chart-svg" viewBox="0 0 820 320" preserveAspectRatio="none">
+            <polyline id="pdf-polyline-legacy" fill="none" stroke="#ef4444" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            <polyline id="pdf-polyline-waas" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          </svg>
+        </div>
+        <div class="pdf-chart-years"><span>Tahun 1</span><span>Tahun 2</span><span>Tahun 3</span><span>Tahun 4</span><span>Tahun 5</span></div>
+      </div>
+      <div class="pdf-two-grid">
+        <div class="pdf-card-gray">
+          <div class="pdf-mini-label">CapEx Benchmark</div>
+          <div class="pdf-card-value">≈ IDR 4.05 Million per m³/day</div>
+        </div>
+        <div class="pdf-card-blue">
+          <div class="pdf-mini-label">Infrastructure Value Fully Covered by Invila™</div>
+          <div class="pdf-card-value" id="pdf-val-capex">Rp 6.25 Miliar</div>
+        </div>
+      </div>
+      <div class="pdf-card-rose">
+        <div>
+          <div class="pdf-mini-label">5-Year Savings Projection</div>
+          <div class="pdf-rose-copy">Projected cumulative financial savings over a five-year operating period, supported by a zero upfront CapEx model and the transfer of asset maintenance responsibility.</div>
+        </div>
+        <div class="pdf-rose-total">
+          <div class="pdf-mini-label">Estimated Net Savings</div>
+          <div class="big" id="pdf-val-five-projection">24.57 Miliar</div>
+          <div class="small">over five years</div>
+        </div>
+      </div>
+      <div class="pdf-card-note">
+        <div class="pdf-note-title">Catatan Strategis :</div>
+        <div class="pdf-note-copy">Data penghematan di atas menunjukkan bahwa transformasi utilitas air menjadi model layanan (WaaS) tidak hanya mengurangi beban operasional, tetapi juga memindahkan seluruh risiko pemeliharaan dan degradasi aset kepada Invila™. Ini adalah langkah nyata menuju efisiensi industri modern.</div>
+      </div>
+      <div class="pdf-system">Invila™ Intelligence System</div>
+    </div>
+  </div>
+
+  <div class="risk-modal" id="riskModal" aria-hidden="true">
+    <div class="risk-modal-backdrop" data-close-risk></div>
+    <div class="risk-modal-card">
+      <button class="risk-modal-close" type="button" data-close-risk aria-label="Close modal">×</button>
+      <p class="risk-kicker" style="margin-bottom:8px;">Risk Analysis</p>
+      <h4 id="riskModalTitle">Risk Title</h4>
+      <p id="riskModalBody">Risk description</p>
+      <button class="risk-modal-cta" type="button" data-close-risk>Saya Paham</button>
+    </div>
+  </div>
 
   <script>
     const siteHeader = document.getElementById('siteHeader');
@@ -938,6 +1850,44 @@
     const mediaExecutiveOverlay = document.getElementById('mediaExecutiveOverlay');
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
+    const riskModal = document.getElementById('riskModal');
+    const riskModalTitle = document.getElementById('riskModalTitle');
+    const riskModalBody = document.getElementById('riskModalBody');
+
+    const CONFIG = {
+      flowRate: 1500,
+      legacyCost: 14600,
+      invilaTariff: 5500,
+      capexPerLPS: 360000000
+    };
+    const currentData = { ...CONFIG };
+
+    const riskContent = {
+      1: {
+        title: 'Margin Keuntungan Terancam',
+        content: 'Kenaikan tarif air industri dan struktur biaya yang tidak efisien akan langsung memotong profitabilitas bersih. Tanpa sistem yang terukur, HPP perusahaan menjadi terlalu mudah terdorong oleh faktor eksternal.'
+      },
+      2: {
+        title: 'Krisis Bahan Baku Air',
+        content: 'Ketika sumber air baku menjadi semakin ketat dan regulasi terus bergerak, perusahaan membutuhkan model suplai yang lebih aman agar kontinuitas produksi tidak bergantung pada satu skenario pasokan saja.'
+      },
+      3: {
+        title: 'Kerugian Akibat Downtime',
+        content: 'Satu kegagalan sistem air dapat menghentikan lini produksi, memperlambat delivery, dan menambah biaya pemulihan. Dampak finansial downtime sering jauh lebih besar dari yang terlihat dalam laporan utilitas.'
+      },
+      4: {
+        title: 'Modal Mati di Utilitas',
+        content: 'Dana besar yang tertahan di aset utilitas mengurangi fleksibilitas investasi. Dalam konteks direksi, ini berarti ruang untuk ekspansi dan prioritas bisnis inti ikut tertekan.'
+      },
+      5: {
+        title: 'Ancaman Izin Operasional',
+        content: 'Kepatuhan terhadap kualitas air dan effluent bukan sekadar isu teknis. Ketika standar tidak tercapai, perusahaan menghadapi risiko reputasi, tekanan audit, hingga hambatan operasional yang lebih serius.'
+      },
+      6: {
+        title: 'Inefisiensi Biaya SDM',
+        content: 'Menempatkan kompleksitas pengelolaan air sepenuhnya di internal dapat menambah beban tim operasional, memperbesar peluang human error, dan mengalihkan fokus dari core business yang seharusnya lebih strategis.'
+      }
+    };
 
     const syncHeader = () => {
       if (window.scrollY > 10) siteHeader.classList.add('scrolled');
@@ -972,6 +1922,139 @@
       proofVideo.addEventListener('loadedmetadata', syncExecutiveOverlay);
       proofVideo.addEventListener('ended', () => mediaExecutiveOverlay.classList.remove('show'));
     }
+
+    const openRiskModal = (id) => {
+      const data = riskContent[id];
+      if (!data || !riskModal) return;
+      riskModalTitle.textContent = data.title;
+      riskModalBody.textContent = data.content;
+      riskModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeRiskModal = () => {
+      if (!riskModal) return;
+      riskModal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('[data-risk]').forEach((button) => {
+      button.addEventListener('click', () => openRiskModal(button.dataset.risk));
+    });
+    document.querySelectorAll('[data-close-risk]').forEach((button) => {
+      button.addEventListener('click', closeRiskModal);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeRiskModal();
+    });
+
+    const formatRp = (value) => {
+      const abs = Math.abs(value);
+      if (abs >= 1e9) return `Rp ${(value / 1e9).toFixed(2)} Miliar`;
+      if (abs >= 1e6) return `Rp ${(value / 1e6).toFixed(1)} Juta`;
+      return `Rp ${Math.round(value).toLocaleString('id-ID')}`;
+    };
+
+    const updateDashboard = () => {
+      const flow = currentData.flowRate;
+      const savingsPerM3 = currentData.legacyCost - currentData.invilaTariff;
+      const monthly = savingsPerM3 * flow * 30;
+      const annual = monthly * 12;
+      const fiveYear = annual * 5;
+      const capex = (flow / 86.4) * CONFIG.capexPerLPS;
+
+      document.getElementById('view-monthly-saving').textContent = formatRp(monthly);
+      document.getElementById('view-annual-saving').textContent = formatRp(annual);
+      document.getElementById('view-five-year-saving').textContent = formatRp(fiveYear);
+      document.getElementById('view-capex-total').textContent = formatRp(capex);
+    };
+
+    document.querySelectorAll('.control-panel input').forEach((input) => {
+      input.addEventListener('input', (event) => {
+        const key = event.target.dataset.key;
+        const numeric = parseInt(event.target.value.replace(/\D/g, ''), 10) || 0;
+        currentData[key] = numeric;
+        event.target.value = numeric ? numeric.toLocaleString('en-US') : '';
+        updateDashboard();
+    updatePdfTemplates();
+      });
+    });
+
+    const formatPdfCurrency = (value) => {
+      const abs = Math.abs(value);
+      if (abs >= 1e9) return `Rp ${(value / 1e9).toFixed(2)} Miliar`;
+      if (abs >= 1e6) return `Rp ${(value / 1e6).toFixed(1)} Juta`;
+      return `Rp ${Math.round(value).toLocaleString('id-ID')}`;
+    };
+
+    const formatWholeCurrency = (value) => `Rp${Math.round(value).toLocaleString('id-ID')}`;
+
+    const updatePdfTemplates = () => {
+      const flow = currentData.flowRate;
+      const savingsPerM3 = currentData.legacyCost - currentData.invilaTariff;
+      const monthly = savingsPerM3 * flow * 30;
+      const annual = monthly * 12;
+      const fiveYear = annual * 5;
+      const capex = (flow / 86.4) * CONFIG.capexPerLPS;
+
+      document.getElementById('pdf-table-flow').textContent = `${flow.toLocaleString('id-ID')} m³/day`;
+      document.getElementById('pdf-table-legacy').textContent = formatWholeCurrency(currentData.legacyCost);
+      document.getElementById('pdf-table-tariff').textContent = formatWholeCurrency(currentData.invilaTariff);
+      document.getElementById('pdf-val-monthly').textContent = formatPdfCurrency(monthly);
+      document.getElementById('pdf-val-annual').textContent = formatPdfCurrency(annual);
+      document.getElementById('pdf-val-capex').textContent = formatPdfCurrency(capex);
+      document.getElementById('pdf-val-five-projection').textContent = formatPdfCurrency(fiveYear).replace('Rp ', '');
+
+      const svgW = 820;
+      const svgH = 320;
+      const legacyAnnual = currentData.legacyCost * flow * 365;
+      const waasAnnual = currentData.invilaTariff * flow * 365;
+      const maxVal = legacyAnnual * 5;
+      let legacyPoints = '';
+      let waasPoints = '';
+      for (let i = 0; i <= 4; i += 1) {
+        const x = (i / 4) * svgW;
+        const legacyY = svgH - (((legacyAnnual * (i + 1)) / maxVal) * svgH);
+        const waasY = svgH - (((waasAnnual * (i + 1)) / maxVal) * svgH);
+        legacyPoints += `${x},${legacyY} `;
+        waasPoints += `${x},${waasY} `;
+      }
+      document.getElementById('pdf-polyline-legacy').setAttribute('points', legacyPoints.trim());
+      document.getElementById('pdf-polyline-waas').setAttribute('points', waasPoints.trim());
+    };
+
+    document.getElementById('btn-download')?.addEventListener('click', async () => {
+      const button = document.getElementById('btn-download');
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Generating PDF';
+      updatePdfTemplates();
+      try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pages = ['pdf-page-1', 'pdf-page-2'];
+        for (let i = 0; i < pages.length; i += 1) {
+          const pageNode = document.getElementById(pages[i]);
+          const canvas = await html2canvas(pageNode, {
+            scale: 2,
+            backgroundColor: '#f3f4f6',
+            useCORS: true,
+            logging: false
+          });
+          if (i > 0) pdf.addPage();
+          pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
+        }
+        pdf.save(`Invila-Strategic-Report-${Date.now()}.pdf`);
+      } catch (error) {
+        console.error(error);
+        alert('PDF belum berhasil dibuat. Coba lagi setelah semua asset termuat.');
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    });
+
+    updateDashboard();
   </script>
 </body>
 </html>
