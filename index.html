@@ -339,33 +339,80 @@
       background: #dfe7f6;
       aspect-ratio: 16 / 10;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.68);
+      min-height: 520px;
+      isolation: isolate;
     }
-    .video-placeholder {
+    .media-window video {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-      display: grid;
-      place-items: center;
-      align-content: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #dbe7ff 0%, #f4f8ff 100%);
-      color: #17378f;
-      text-align: center;
-      padding: 24px;
+      object-fit: cover;
+      background: #cfd9ec;
+      transform: scale(1.01);
     }
-    .video-badge {
+    .media-window::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8,14,28,0.18) 0%, rgba(8,14,28,0.08) 28%, rgba(8,14,28,0.42) 100%),
+        radial-gradient(circle at 18% 58%, rgba(56,160,255,0.28), transparent 22%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .media-executive-overlay {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 18px;
+      z-index: 2;
+      display: grid;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(9,16,32,0.08), rgba(9,16,32,0.56));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 14px 34px rgba(9,16,32,0.18);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      max-width: 520px;
+    }
+    .media-executive-overlay small {
+      display: block;
+      font-size: 0.64rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+    .media-executive-overlay strong {
+      display: block;
+      max-width: 16ch;
+      font-size: clamp(1.08rem, 1.8vw, 1.5rem);
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+    .media-executive-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .media-executive-meta span {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      padding: 8px 14px;
+      min-height: 30px;
+      padding: 0 10px;
       border-radius: 999px;
-      background: rgba(42,95,255,0.12);
-      font-size: 0.72rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.66rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
     }
-    .video-copy strong { display: block; font-size: 1.1rem; margin-bottom: 6px; color: #0d1426; }
-    .video-copy span { font-size: 0.92rem; color: #4b5a75; }
     .media-overlay {
       position: absolute;
       inset: auto 14px 14px 14px;
@@ -539,7 +586,16 @@
       h1 { max-width: 100%; }
       .hero-points { grid-template-columns: 1fr; gap: 18px; }
       .media-card, .solution-shell, .cta-shell, .value-band { padding: 22px; border-radius: 24px; }
-      .media-window { border-radius: 20px; }
+      .media-window { border-radius: 20px; min-height: 420px; }
+      .media-executive-overlay {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        padding: 14px 15px;
+        border-radius: 18px;
+        max-width: calc(100% - 28px);
+      }
+      .media-executive-overlay strong { max-width: 100%; }
       .btn { width: 100%; }
       .hero-actions { display: grid; grid-template-columns: 1fr; }
       .brand-wordmark { white-space: normal; }
@@ -621,11 +677,24 @@
             <div style="font-size:0.78rem;font-weight:800;letter-spacing:0.10em;text-transform:uppercase;color:#6b7588;">Engineered Water Infrastructure</div>
           </div>
           <div class="media-window">
-            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Engineered Water Infrastructure video proof">
+            <video autoplay muted loop playsinline preload="metadata" aria-label="Engineered Water Infrastructure video proof">
               <source src="./KIW%201.mp4" type="video/mp4" />
               Browser Anda tidak mendukung pemutaran video.
             </video>
+            <div class="media-executive-overlay">
+              <div>
+                <small>Executive Snapshot</small>
+                <strong>Operational proof that supports uptime, cost discipline, and compliance readiness.</strong>
+              </div>
+              <div class="media-executive-meta">
+                <span>For CEO</span>
+                <span>For Finance</span>
+                <span>For Plant</span>
+                <span>For EHS</span>
+              </div>
+            </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
