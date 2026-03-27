@@ -368,19 +368,29 @@
       bottom: 18px;
       z-index: 2;
       display: grid;
-      gap: 8px;
-      padding: 12px 16px;
+      gap: 6px;
+      padding: 10px 14px;
       border-radius: 18px;
-      background: linear-gradient(180deg, rgba(9,16,32,0.04), rgba(9,16,32,0.34));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 10px 24px rgba(9,16,32,0.12);
-      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(9,16,32,0.03), rgba(9,16,32,0.26));
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 8px 20px rgba(9,16,32,0.10);
+      backdrop-filter: blur(5px);
       color: #ffffff;
-      max-width: 92%;
+      max-width: 560px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 240ms ease, transform 240ms ease, visibility 240ms ease;
+      pointer-events: none;
+    }
+    .media-executive-overlay.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
     .media-executive-overlay small {
       display: block;
-      font-size: 0.62rem;
+      font-size: 0.60rem;
       font-weight: 900;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -388,30 +398,17 @@
     }
     .media-executive-overlay strong {
       display: block;
-      max-width: 34ch;
-      font-size: clamp(0.98rem, 1.35vw, 1.22rem);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+      max-width: 30ch;
+      font-size: clamp(0.96rem, 1.2vw, 1.12rem);
+      line-height: 1.26;
+      letter-spacing: -0.01em;
       color: #ffffff;
     }
     .media-executive-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      display: none;
     }
     .media-executive-meta span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      font-size: 0.64rem;
-      font-weight: 800;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.90);
+      display: none;
     }
     .media-overlay {
       position: absolute;
@@ -591,7 +588,7 @@
         left: 12px;
         right: 18px;
         bottom: 12px;
-        padding: 12px 13px;
+        padding: 10px 12px;
         border-radius: 16px;
         max-width: calc(100% - 30px);
       }
@@ -681,20 +678,13 @@
               <source src="./KIW%201.mp4" type="video/mp4" />
               Browser Anda tidak mendukung pemutaran video.
             </video>
-            <div class="media-executive-overlay">
+            <div class="media-executive-overlay" id="mediaExecutiveOverlay">
               <div>
                 <small>Compliance Snapshot</small>
-                <strong>Operational visibility that strengthens compliance readiness, response control, and plant-level accountability.</strong>
-              </div>
-              <div class="media-executive-meta">
-                <span>For Finance</span>
-                <span>For Plant</span>
-                <span>For EHS</span>
+                <strong>Compliance visibility for faster response, tighter control, and audit readiness.</strong>
               </div>
             </div>
           </div>
-        </div>
-        </div>
         </div>
       </div>
     </section>
@@ -777,6 +767,8 @@
 
   <script>
     const siteHeader = document.getElementById('siteHeader');
+    const proofVideo = document.querySelector('.media-window video');
+    const mediaExecutiveOverlay = document.getElementById('mediaExecutiveOverlay');
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
 
@@ -798,6 +790,21 @@
         menuToggle.classList.remove('open');
       });
     });
+
+    const syncExecutiveOverlay = () => {
+      if (!proofVideo || !mediaExecutiveOverlay) return;
+      const t = proofVideo.currentTime || 0;
+      if (t >= 5 && t <= 8) mediaExecutiveOverlay.classList.add('show');
+      else mediaExecutiveOverlay.classList.remove('show');
+    };
+
+    if (proofVideo && mediaExecutiveOverlay) {
+      proofVideo.addEventListener('timeupdate', syncExecutiveOverlay);
+      proofVideo.addEventListener('play', syncExecutiveOverlay);
+      proofVideo.addEventListener('seeked', syncExecutiveOverlay);
+      proofVideo.addEventListener('loadedmetadata', syncExecutiveOverlay);
+      proofVideo.addEventListener('ended', () => mediaExecutiveOverlay.classList.remove('show'));
+    }
   </script>
 </body>
 </html>
