@@ -277,6 +277,36 @@
     }
     .hero-footnote::before { content: ""; width: 28px; height: 1px; background: rgba(16,24,43,0.16); }
 
+    .pain-head {
+      margin-top: 34px;
+      margin-bottom: 10px;
+      max-width: 760px;
+    }
+    .pain-kicker {
+      margin: 0 0 10px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+    .pain-title {
+      margin: 0;
+      max-width: 18ch;
+      font-size: clamp(1.45rem, 2.5vw, 2.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: #0d1426;
+    }
+    .pain-bridge {
+      margin: 14px 0 0;
+      max-width: 52rem;
+      font-size: 1rem;
+      line-height: 1.74;
+      color: var(--muted);
+      text-wrap: pretty;
+    }
+
     .hero-points {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -634,10 +664,28 @@
         line-height: 1.62;
         max-width: 100%;
       }
+      .pain-head {
+        margin-top: 24px;
+        margin-bottom: 8px;
+      }
+      .pain-kicker {
+        font-size: 0.63rem;
+      }
+      .pain-title {
+        max-width: 100%;
+        font-size: clamp(1.2rem, 6vw, 1.65rem);
+        line-height: 1.12;
+      }
+      .pain-bridge {
+        margin-top: 10px;
+        font-size: 0.92rem;
+        line-height: 1.62;
+        max-width: 100%;
+      }
       .hero-points {
         grid-template-columns: 1fr;
         gap: 14px;
-        margin-top: 24px;
+        margin-top: 18px;
       }
       .hero-point p {
         font-size: 0.95rem;
@@ -764,6 +812,12 @@
           </div>
 
           <div class="hero-footnote">Factory visit available for strategic project review.</div>
+
+          <div class="pain-head">
+            <p class="pain-kicker">Pain Section</p>
+            <h2 class="pain-title">Tantangan Air Industri Kini Menjadi Tekanan Bisnis</h2>
+            <p class="pain-bridge">Di ruang direksi, air tidak lagi diposisikan sekadar sebagai utilitas pendukung, melainkan sebagai faktor yang ikut menentukan profitabilitas, kontinuitas produksi, dan fleksibilitas investasi perusahaan. Dinamika industri saat ini membuat infrastruktur air mulai memengaruhi biaya operasional, kestabilan produksi, hingga ruang gerak investasi.</p>
+          </div>
 
           <div class="hero-points" id="zero-capex">
             <div class="hero-point">
